@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Test</title>
+</head>
+
+<body>
+
+    <main class="main">
+        <div class="container">
+            <form class="form">
+                <h2 class="form__title">Email verification</h2>
+                <div class="form__container">
+                    <p class="form__descr">Let’s get started with this simple verification.</p>
+                    <label>Email verification <input class="form__input" type="email"
+                            placeholder="example@mail.com"></label>
+                    <p class="email__validator-notation validator-notation validator-notation_disabled">Looks like it’s
+                        not an email. Check it.</p>
+                    <label>Verification URL <input class="form__input" type="url" placeholder="https://"></label>
+                    <p class="link__validator-notation validator-notation validator-notation_disabled">What about
+                        security bro?</p>
+                </div>
+                <button class="form__btn" disabled>Move forward</button>
+            </form>
+        </div>
+    </main>
+    <script src="./js/index.js"></script>
+</body>
+
+</html>
