@@ -9,7 +9,7 @@ let isLinkValid;
 let linkVal;
 
 function emailVerification(e) {
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    const regex = /^(?!.*[@._%+-]{2})(?![@._%+-])[a-zA-Z0-9!#$%&'*+/=?^_`{|.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     let emailInputVal = e.target.value;
     if (!emailInputVal.match(regex)) {
         if (emailNotification.classList.contains('validator-notation_disabled')) {
@@ -22,11 +22,12 @@ function emailVerification(e) {
         emailNotification.classList.remove('validator-notation_active');
         isEmailValid = true;
     }
+    checkInputs();
 }
 
 
 function linkVerification(e) {
-    const regex = /^https:\/\//;
+    const regex = /^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/;
     let linkInputVal = e.target.value;
     if (!linkInputVal.match(regex)) {
         if (linkNotification.classList.contains('validator-notation_disabled')) {
@@ -34,13 +35,14 @@ function linkVerification(e) {
         }
         linkNotification.classList.add('validator-notation_active');
         isLinkValid = false;
+
     } else {
         linkNotification.classList.add('validator-notation_disabled');
         linkNotification.classList.remove('validator-notation_active');
         isLinkValid = true;
         linkVal = linkInputVal;
     }
-
+    checkInputs();
 }
 function checkInputs() {
     const submitBtn = document.querySelector('.form__btn');
@@ -50,6 +52,7 @@ function checkInputs() {
     }
 
     submitBtn.setAttribute('disabled', '');
+    return;
 }
 
 const postData = async (url, data = {}) => {
@@ -63,14 +66,17 @@ const postData = async (url, data = {}) => {
     return response.json();
 }
 
-function handleFormSubmit(e) {
+async function handleFormSubmit(e) {
     e.preventDefault();
-    postData(linkVal);
+    const formData = {
+        email: emailInput.value,
+        url: linkInput.value
+    }
+    console.log(formData)
+    await postData(linkVal, formData);
     window.location.href = 'https://payproglobal.com/';
 }
 
 form.addEventListener('submit', handleFormSubmit);
-emailInput.addEventListener('input', emailVerification);
-linkInput.addEventListener('input', linkVerification);
-emailInput.addEventListener('blur', checkInputs);
-linkInput.addEventListener('blur', checkInputs);
+emailInput.addEventListener('blur', emailVerification);
+linkInput.addEventListener('blur', linkVerification);
