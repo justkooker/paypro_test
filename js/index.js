@@ -66,14 +66,13 @@ const postData = async (url, data = {}) => {
     return response.json();
 }
 
-async function handleFormSubmit(e) {
+function handleFormSubmit(e) {
     e.preventDefault();
     const formData = {
         email: emailInput.value,
         url: linkInput.value
     }
-    console.log(formData)
-    await postData(linkVal, formData);
+    postData(linkVal, formData); //по ідеі ця функція має бути асинхронною и тут має бути await postData(linkVal, formData);
     window.location.href = 'https://payproglobal.com/';
 }
 
