@@ -31,7 +31,6 @@ body {
   max-width: 800px;
   max-height: 320px;
   border-radius: 50%;
-  z-index: -1;
   -webkit-filter: blur(200px);
           filter: blur(200px);
 }
@@ -40,12 +39,14 @@ body {
   left: 0;
   background-color: #f9d7af;
   opacity: 70%;
+  z-index: -1;
 }
 .container::after {
   bottom: 0;
   right: 0;
   background-color: #9295e2;
   opacity: 50%;
+  z-index: -2;
 }
 
 .form {
